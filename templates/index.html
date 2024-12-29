@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Discord Timestamp Generator</title>
+</head>
+<body>
+    <div class="flex-wrap">
+        <div class="container">
+            <h1>Discord Timestamp Generator</h1>
+            <form method="POST" id="time-form">
+                <input type="date" name="date" required/>
+                <input type="time" name="hours" required/>
+                <button type="submit">Generate Timestamp</button>
+            </form>
+
+            {% if discord_code %}
+                <p>Discord timestamp: <strong>{{ discord_code }}</strong></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        document.getElementById('time-form').addEventListener('submit', function(event) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'timezone';
+            input.value = timezone;
+            document.getElementById('time-form').appendChild(input);
+        });
+    </script>
+</body>
+</html>
